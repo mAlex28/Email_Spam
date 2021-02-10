@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 # download the book data from the website
 import requests
 # calculate word per message
@@ -15,57 +9,31 @@ import smtplib as smtp
 # create the email
 from email.message import EmailMessage 
 
+# Import the book data for war and peace
 
-# ## Import the book data for war and peace
-
-# <b>Send a request</b> to download the book from the Gutenberg Library
-
-# In[5]:
-
-
+# Send a request to download the book from the Gutenberg Library
 book_url = "https://www.gutenberg.org/files/2600/2600-0.txt"
 r = requests.get(book_url)
 
-
-# Remove <b>ascii</b> characters
-
-# In[6]:
-
-
+# Remove ascii characters
 book_data = r.text.encode('ascii', 'ignore').decode('ascii')
 
-
-# <b>Split the words</b> of each book into a list of words
-
-# In[8]:
-
-
+# Split the words of each book into a list of words
 word_list = book_data.split(" ")
 
-
-# <b>Determine the message data</b>
-
-# In[12]:
-
-
+# Determine the message data
 msg_size = floor(len(word_list) / 1000)
 final_msg_size = len(word_list) - (msg_size * 999)
-
 print(f"Words per message: {msg_size}\nFinal message size: {final_msg_size}")
 
-
-# ## Setup server authentication variables
+# Setup server authentication variables
 
 # Create the email server connection
 # 
 # SMTP servers used:
-#     <ul>
-#         <li>smtp.gmail.com (port 587 or 465)</li>
-#         <li>smtp.office365.com (port 587)</li>
-#         <li>smtp.mail.yahoo.com (port 587 or 465)</li>
-#     </ul>
-
-# In[19]:
+#     smtp.gmail.com (port 587 or 465)
+#     smtp.office365.com (port 587)
+#     smtp.mail.yahoo.com (port 587 or 465)
 
 
 user = "abcd1@gmail.com"
@@ -76,23 +44,17 @@ smtp_host = 'smtp.gmail.com'
 smtp_port = 587
 
 
-# ## Setup email variables
-
-# In[20]:
-
-
+# Setup email variables
 subject = 'War & Peace - Part '
 msg_text = ''
 start_pos = 0
 msg_count = 0
 
 
-# ## Create and send email
+# Create and send email
+#   Open a connectionto the mail server
+#   Create and send the email messge
 
-# <b>Open a connection</b> to the mail server.<br>
-# <b>Create and send</b> the email messge
-
-# In[23]:
 
 
 # seperate into chunks of 10 emails in order to avoid sending limits (2000 mails per day)
@@ -134,10 +96,6 @@ for b in range(20):
     # close the server
     server.close()
 
-
-# <i>This will send 1000 emails as chunks of 50 to <b>'to_address'</b> recepients</i>
-
-# In[ ]:
 
 
 
