@@ -11,4 +11,4 @@
   You need to enable the less secure apps option in your gamil account(senders) to send the mails.
 </p>
 
-
+I have written this using jupyter notebook but you can also try it using a python IDE
